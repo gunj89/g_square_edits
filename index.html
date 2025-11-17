@@ -1,689 +1,1187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G² Edits - Professional Video Editing</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>G² Edits | Premium Video Editing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Base Styles */
+        :root {
+            --primary: #000;
+            --secondary: #121212;
+            --accent: #D4AF37;
+            --accent-dark: #B8941F;
+            --text: #fff;
+            --text-secondary: #b0b0b0;
+            --card-bg: #1a1a1a;
+            --transition: all .3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            color: #2c3e50;
+            background-color: var(--primary);
+            color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Hero Section - Centered with Animation */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ensure hero's container centers its content horizontally & vertically */
+        .hero>.container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, .2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section (centered, responsive) */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 5%;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 50%, #f0f3f7 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
             position: relative;
             overflow: hidden;
+            padding: 40px 0;
         }
 
-        /* Animated Background Elements */
-        .hero::before,
+        /* Animated gradient background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #D4AF37, #000, #D4AF37, #1a1a1a);
+            background-size: 400% 400%;
+            opacity: 0.05;
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animated orbs */
         .hero::after {
             content: '';
             position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
             border-radius: 50%;
-            opacity: 0.15;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .hero::before {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             top: -100px;
             right: -100px;
-            animation: float 10s ease-in-out infinite;
-        }
-
-        .hero::after {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            bottom: -50px;
-            left: -50px;
-            animation: float 12s ease-in-out infinite reverse;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate(0, 0) scale(1);
+                opacity: 0.8;
             }
+
+            25% {
+                transform: translate(-50px, 50px) scale(1.1);
+                opacity: 0.6;
+            }
+
             50% {
-                transform: translate(30px, -50px) scale(1.1);
+                transform: translate(-100px, 100px) scale(0.9);
+                opacity: 0.5;
+            }
+
+            75% {
+                transform: translate(-30px, 60px) scale(1.05);
+                opacity: 0.7;
+            }
+        }
+
+        /* Additional floating orb */
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(184, 148, 31, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -80px;
+            left: -80px;
+            animation: floatReverse 18s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatReverse {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+
+            25% {
+                transform: translate(40px, -40px) scale(1.05);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(80px, -80px) scale(0.95);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: translate(40px, -50px) scale(1.02);
+                opacity: 0.75;
             }
         }
 
         .hero-content {
-            text-align: center;
-            max-width: 800px;
-            animation: slideInLeft 0.8s ease-out;
+            width: 100%;
+            max-width: 900px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(4px);
+            animation: contentFadeIn 1s ease-out;
         }
 
-        @keyframes slideInLeft {
+        @keyframes contentFadeIn {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
+        }
+
+        .hero-logo-placeholder {
+            /* fixed size that scales via media queries */
+            width: 140px;
+            height: 140px;
+            background: var(--card-bg);
+            border: 3px dashed var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 0.95rem;
+            overflow: hidden;
+            animation: logoRotate 8s linear infinite;
+        }
+
+        @keyframes logoRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(2deg) scale(1.02);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        /* Make logos responsive and preserve aspect ratio even if inline styles exist */
+        .hero-logo-placeholder img,
+        .footer-logo-placeholder img {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 50%;
+        }
+
+        /* Footer logo default size */
+        .footer-logo-placeholder {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        /* Client avatar: ensure consistent responsive sizing */
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex: 0 0 60px;
+            margin-right: 15px;
+        }
+
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            color: #2c3e50;
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            line-height: 1.08;
+            animation: slideDown 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            max-width: 720px;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            text-decoration: none;
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            max-width: 720px;
+            animation: slideDown 0.8s ease-out 0.4s both;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideDown 0.8s ease-out 0.6s both;
+        }
+
+        /* Scroll indicator (visible on all devices) */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4rem;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 3;
+            color: var(--accent);
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            font-size: .85rem;
+            user-select: none;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 5%;
-            background: #fff;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 4rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 2.5rem;
-            border-radius: 15px;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-icon svg {
-            width: 40px;
-            height: 40px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            color: #2c3e50;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.7;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .portfolio-item {
-            height: 280px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .portfolio-item svg {
-            width: 80px;
-            height: 80px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 45px rgba(102, 126, 234, 0.3);
-        }
-
-        /* Get In Touch Section */
-        .get-in-touch {
-            padding: 6rem 5%;
-            background: #fff;
-        }
-
-        .touch-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .touch-description {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .contact-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .contact-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-        }
-
-        .contact-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-        }
-
-        .contact-box a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: inherit;
-            gap: 0.8rem;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            border-radius: 10px;
-        }
-
-        .contact-icon svg {
+        .scroll-indicator svg {
             width: 28px;
             height: 28px;
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none
         }
 
-        .contact-info {
-            text-align: left;
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px)
+            }
         }
 
-        .contact-info strong {
-            display: block;
-            color: #2c3e50;
-            margin-bottom: 0.3rem;
+        /* Sections below hero keep original styling (adjusted for contrast) */
+        .services {
+            background: var(--secondary);
         }
 
-        .contact-info span {
-            color: #667eea;
-            font-weight: 600;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
         }
 
-        .social-links {
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, .04);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .3);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.6rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--secondary);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 2px solid #e9ecef;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        .social-icon {
-            width: 50px;
-            height: 50px;
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 0 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .client-info {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            margin-top: 20px;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            overflow: hidden;
+            flex: 0 0 60px;
+            margin-right: 15px;
         }
 
-        .social-icon svg {
-            width: 24px;
-            height: 24px;
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .social-icon:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        .client-details h4 {
+            margin-bottom: 5px;
+        }
+
+        .client-details p {
+            margin: 0;
+            color: var(--accent);
         }
 
         /* CTA Section */
-        .cta-section {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .cta {
+            background: var(--primary);
             text-align: center;
-            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .cta h2 {
+            margin-bottom: 1.5rem;
         }
 
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
 
-        .cta-button-light {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            color: var(--text);
+            transition: var(--transition);
         }
 
-        .cta-button-light:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        .contact-icon:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
         /* Footer */
         footer {
-            background: #2c3e50;
-            padding: 2rem 5%;
-            text-align: center;
-            color: #bdc3c7;
+            background: var(--secondary);
+            padding: 60px 0 30px;
         }
 
-        @media (max-width: 768px) {
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--card-bg);
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: .8rem;
+            overflow: hidden;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            color: var(--text-secondary);
+            font-size: .9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width:992px) {
+            h1 {
+                font-size: 3rem
+            }
+
+            h2 {
+                font-size: 2.2rem
+            }
+
+            section {
+                padding: 80px 0
+            }
+
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.2rem
             }
 
-            .hero::before {
-                width: 250px;
-                height: 250px;
-                top: -80px;
-                right: -80px;
+            .hero-logo-placeholder {
+                width: 120px;
+                height: 120px
             }
 
-            .hero::after {
-                width: 200px;
-                height: 200px;
-                bottom: -30px;
-                left: -30px;
+            .client-avatar {
+                width: 56px;
+                height: 56px;
+                flex: 0 0 56px;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            .footer-logo-placeholder {
+                width: 64px;
+                height: 64px;
             }
 
-            .social-links {
-                gap: 1rem;
+            .hero-content {
+                padding: 24px
+            }
+
+            .step:not(:last-child):after {
+                display: none;
+            }
+
+            .process-steps {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width:768px) {
+            .navbar {
+                position: relative;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: var(--secondary);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-150%);
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width:576px) {
+            section {
+                padding: 60px 0
+            }
+
+            h1 {
+                font-size: 2.2rem
+            }
+
+            h2 {
+                font-size: 1.8rem
+            }
+
+            .hero {
+                padding: 30px 0
+            }
+
+            .hero h1 {
+                font-size: 1.6rem
+            }
+
+            .hero-logo-placeholder {
+                width: 96px;
+                height: 96px
+            }
+
+            .client-avatar {
+                width: 48px;
+                height: 48px;
+                flex: 0 0 48px;
+                margin-right: 12px;
+            }
+
+            .footer-logo-placeholder {
+                width: 56px;
+                height: 56px;
+            }
+
+            .hero p {
+                font-size: .98rem
+            }
+
+            .hero-content {
+                width: 92%;
+            }
+
+            .floating-element {
+                opacity: .06
+            }
+
+            .logo-placeholder {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Hero Section -->
+    <!-- Header -->
+
+
+    <!-- Hero Section (centered; navigation removed) -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Transform Your Vision Into Motion With <h1><span>G² Edits</span></h1></h1>
-            <p>Professional video editing that tells your story. Fast turnaround, exceptional quality, and creative excellence delivered every time.</p>
-            <button class="cta-button">Start Your Project</button>
+        <div class="container">
+            <div class="hero-content" role="region" aria-label="Hero">
+                <div class="hero-logo-placeholder" aria-hidden="true"><img src="g.png" alt=""
+                        style="height: 140px; width: 140px;"></div>
+                <h1>Transform Your Vision With <span>G² Edits</span></h1>
+                <p>We create stunning, professional video content that captivates your audience and elevates your brand.
+                    From concept to final cut — we bring your ideas to life.</p>
+                <div class="hero-btns">
+                    <a href="#services" class="btn">Our Services</a>
+                    <a href="#contact" class="btn btn-outline">Start a Project</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- scroll indicator visible on all devices -->
+        <div class="scroll-indicator" aria-hidden="true">
+            <span>Scroll for more</span>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 5v10M12 17l-4-4h8l-4 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">Why Choose G² Edits</h2>
-        <p class="section-subtitle">We deliver professional video editing with precision and creativity</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="url(#iconGradient1)"/>
-                    </svg>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-film"></i></div>
+                    <h3>Video Editing</h3>
+                    <p>Professional editing for all types of content including commercials, social media, documentaries,
+                        and more.</p>
                 </div>
-                <h3>Precision Editing</h3>
-                <p>Frame-perfect cuts, seamless transitions, and professional-grade editing that captivates your audience</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none" stroke="url(#iconGradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <polyline points="13 2 13 9 20 9" fill="none" stroke="url(#iconGradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-magic"></i></div>
+                    <h3>Color Grading</h3>
+                    <p>Enhance the mood and visual appeal of your footage with expert color correction and grading.</p>
                 </div>
-                <h3>Fast Turnaround</h3>
-                <p>Quick delivery without compromising quality. Get your videos ready when you need them</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="12" cy="12" r="10" fill="none" stroke="url(#iconGradient3)" stroke-width="2"/>
-                        <path d="M12 6v6l4 2" fill="none" stroke="url(#iconGradient3)" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-music"></i></div>
+                    <h3>Sound Design</h3>
+                    <p>Complete audio post-production including sound mixing, Foley, and custom music composition.</p>
                 </div>
-                <h3>Creative Design</h3>
-                <p>Custom color grading, effects, motion graphics, and animations tailored to your brand</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="url(#iconGradient4)" stroke-width="2"/>
-                        <path d="M2 17h20" stroke="url(#iconGradient4)" stroke-width="2"/>
-                        <circle cx="12" cy="9" r="3" fill="url(#iconGradient4)"/>
-                    </svg>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-play-circle"></i></div>
+                    <h3>Motion Graphics</h3>
+                    <p>Dynamic animations and visual effects that bring your brand story to life.</p>
                 </div>
-                <h3>Platform Optimized</h3>
-                <p>Perfectly formatted for YouTube, TikTok, Instagram, and all major social media platforms</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="url(#iconGradient5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>Full Collaboration</h3>
-                <p>Open communication, multiple revisions, and your vision brought to life with our expertise</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="iconGradient6" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#iconGradient6)"/>
-                    </svg>
-                </div>
-                <h3>Cutting Edge</h3>
-                <p>Using the latest tools, trends, and techniques to keep your content ahead of the competition</p>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <h2 class="section-title">Our Recent Work</h2>
-        <p class="section-subtitle">Showcase of our latest video editing projects</p>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="10" y="20" width="80" height="60" rx="5" fill="none" stroke="white" stroke-width="3"/>
-                    <polygon points="40,35 40,65 70,50" fill="white"/>
-                </svg>
-            </div>
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/>
-                    <circle cx="50" cy="50" r="20" fill="white" opacity="0.3"/>
-                    <path d="M50 35 L65 50 L50 65 L35 50 Z" fill="white"/>
-                </svg>
-            </div>
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="15" width="70" height="70" rx="8" fill="none" stroke="white" stroke-width="3"/>
-                    <line x1="20" y1="40" x2="80" y2="40" stroke="white" stroke-width="2"/>
-                    <circle cx="35" cy="60" r="8" fill="white"/>
-                    <path d="M50 50 L80 25" stroke="white" stroke-width="2" fill="none"/>
-                </svg>
-            </div>
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 15 L85 40 L75 85 L25 85 L15 40 Z" fill="none" stroke="white" stroke-width="3"/>
-                    <circle cx="50" cy="55" r="12" fill="white"/>
-                </svg>
-            </div>
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke="white" stroke-width="3"/>
-                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="2"/>
-                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="portfolio-item">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,20 80,50 65,85 35,85 20,50" fill="none" stroke="white" stroke-width="3"/>
-                    <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="2"/>
-                </svg>
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <h2>Our Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>We discuss your vision, goals, and requirements to understand your project needs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>We create a detailed project plan with timelines, milestones, and deliverables.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Production</h3>
+                    <p>Our team works on editing, color grading, sound design, and motion graphics.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>We deliver the final product and ensure you're completely satisfied with the results.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Get In Touch Section -->
-    <section class="get-in-touch" id="touch">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="touch-container">
-            <p class="touch-description">Let's collaborate and create something amazing together. Reach out through any of these channels and we'll get back to you shortly.</p>
-
-            <div class="contact-options">
-                <div class="contact-box">
-                    <a href="tel:+919876543210">
-                        <span class="contact-icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="phoneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 2.08 2.18 2 2 0 0 1 4 2h3a2 2 0 0 1 1.85 1.29 15.94 15.94 0 0 0 8.24 8.24A2 2 0 0 1 22 16.92z" fill="url(#phoneGradient)"/>
-                            </svg>
-                        </span>
-                        <div class="contact-info">
-                            <strong>Call Us</strong>
-                            <span>+91 98765 43210</span>
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>Client Testimonials</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <p>"G² Edits completely transformed the quality of our news videos. The pacing, subtitles, and
+                        transitions look extremely professional. Ever since we started working with them, our viewer
+                        retention has increased noticeably."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="vipul bhai.jpeg">
                         </div>
-                    </a>
-                </div>
-                <div class="contact-box">
-                    <a href="mailto:info@g2edits.com">
-                        <span class="contact-icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="emailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M12 2a2 2 0 0 1 2 2v2.59l3.29 3.29a2 2 0 0 1 0 2.83L14 16.59V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2.59l-3.29-3.29a2 2 0 0 1 0-2.83L4 5.41V3a2 2 0 0 1 2-2h8zm0 2H6v2.41l-1.29 1.29a2 2 0 0 0 0 2.83L6 12.59V15h8v-2.41l1.29-1.29a2 2 0 0 0 0-2.83L14 5.41V4zm-2 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="url(#emailGradient)"/>
-                            </svg>
-                        </span>
-                        <div class="contact-info">
-                            <strong>Email Us</strong>
-                            <span>info@g2edits.com</span>
+                        <div class="client-details">
+                            <h4>Mr. Vipul Gajjar</h4>
+                            <p>Editor: Sach ka Chithha, Sub-Editor: Deepmala News</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <div class="contact-box">
-                    <a href="https://wa.me/919876543210" target="_blank">
-                        <span class="contact-icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="whatsappGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M12 2a10 10 0 0 0-7.94 16.26l-2.48 2.48A1 1 0 0 0 2 22a1 1 0 0 0 1.24-.74l2.48-2.48A10 10 0 1 0 12 2zm0 18a7.94 7.94 0 0 1-5.66-2.34l1.41-1.41A5.98 5.98 0 0 0 12 18a5.98 5.98 0 0 0 3.54-1.24l1.41 1.41A7.94 7.94 0 0 1 12 20zm-3-8a3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3zm4 0a1 1 0 0 0-2 0 1 1 0 0 0 2 0z" fill="url(#whatsappGradient)"/>
-                            </svg>
-                        </span>
-                        <div class="contact-info">
-                            <strong>WhatsApp</strong>
-                            <span>Chat with us</span>
+                <div class="testimonial" style="margin-top: 15px;">
+                    <p>"Working with G² Edits has been an inspiring experience. G² Edits consistently supports GTC with
+                        creative ideas, quality editing, and reliable website work. His fresh concepts have directly
+                        helped our growth, and we trust G² Edits fully. Our partnership of one year remains strong, and
+                        we look forward to achieving even more together."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">
+                            <img src="rahul.png">
                         </div>
-                    </a>
+                        <div class="client-details">
+                            <h4>Mr. Rahul Sharma</h4>
+                            <p>Founder & C.E.O : Gurukul Tuition Classes</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="social-links">
-                <a href="https://facebook.com/g2edits" target="_blank" class="social-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.675 0h-21.35C.596 0 0 .596 0 1.325v21.35C0 23.404.596 24 1.325 24h11.494v-9.294H9.691V11.25h3.128V8.418c0-3.1 1.892-4.788 4.655-4.788 1.325 0 2.465.098 2.798.142v3.24l-1.922.001c-1.505 0-1.794.715-1.794 1.764v2.313h3.588l-.467 3.456h-3.121V24h6.116c.729 0 1.325-.596 1.325-1.325v-21.35C24 .596 23.404 0 22.675 0z" fill="currentColor"/>
-                    </svg>
-                </a>
-                <a href="https://instagram.com/g2edits" target="_blank" class="social-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2.163c3.197 0 3.582.012 4.845.07 1.261.058 1.905.263 2.345.442.537.207 1.004.478 1.45.925.446.446.717.913.925 1.45.179.44.384 1.084.442 2.345.058 1.263.07 1.648.07 4.845s-.012 3.582-.07 4.845c-.058 1.261-.263 1.905-.442 2.345-.207.537-.478 1.004-.925 1.45-.446.446-.913.717-1.45.925-.44.179-.84.384-2.345.442-1.263.058-1.648.07-4.845.07s-3.582-.012-4.845-.07c-1.261-.058-1.905-.263-2.345-.442a3.42 3.42 0 0 1-1.45-.925 3.42 3.42 0 0 1-.925-1.45c-.179-.44-.384-.84-.442-2.345C2.175 15.582 2.163 15.197 2.163 12s.012-3.582.07-4.845c.058-1.261.263-1.905.442-2.345.207-.537.478-1.004.925-1.45.446-.446.913-.717 1.45-.925.44-.179.84-.384 2.345-.442C8.418 2.175 8.803 2.163 12 2.163zm0-2.163C8.638 0 8.25.012 7.045.07 5.84.127 4.9.263 4.045.442 3.19.62 2.5 1.31 1.85 2.045.62 3.19.127 4.13.07 5.335.012 6.538 0 6.925 0 10.287c0 3.362.012 3.75.07 4.955.058 1.261.263 1.905.442 2.345.207.537.478 1.004.925 1.45.446.446.913.717 1.45.925.44.179.84.384 2.345.442 1.205.058 1.593.07 4.845.07s3.582-.012 4.845-.07c1.261-.058 1.905-.263 2.345-.442.537-.207 1.004-.478 1.45-.925.446-.446.717-.913.925-1.45.179-.44.384-1.084.442-2.345.058-1.263.07-1.648.07-4.845s-.012-3.582-.07-4.845c-.058-1.261-.263-1.905-.442-2.345a3.42 3.42 0 0 0-.925-1.45 3.42 3.42 0 0 0-1.45-.925c-.44-.179-.84-.384-2.345-.442C15.582 2.175 15.197 2.163 12 2.163zm0 5.837a6.163 6.163 0 1 0 0 12.325 6.163 6.163 0 0 0 0-12.325zm0 10.325a4.163 4.163 0 1 1 0-8.325 4.163 4.163 0 0 1 0 8.325zm4.5-10.325a1.125 1.125 0 1 0-2.25 0 1.125 1.125 0 0 0 2.25 0z" fill="currentColor"/>
-                    </svg>
-                </a>
-                <a href="https://twitter.com/g2edits" target="_blank" class="social-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23.643 4.937a10.97 10.97 0 0 1-3.128.855 4.48 4.48 0 0 0 1.963-2.475 9.034 9.034 0 0 1-2.827 1.078A4.48 4.48 0 0 0 16.337 3c-2.475 0-4.48 2.005-4.48 4.48 0 .351.04.694.117 1.027A12.74 12.74 0 0 1 1.671 3.149a4.48 4.48 0 0 0-.605 2.243c0 1.548.788 2.91 1.984 3.707a4.48 4.48 0 0 1-2.023-.56v.057c0 2.164 1.537 3.965 3.568 4.375a4.48 4.48 0 0 1-2.016.077c.572 1.791 2.224 3.096 4.176 3.131A9.034 9.034 0 0 1 0 18.293a12.74 12.74 0 0 0 6.91 2.023c8.27 0 12.78-6.857 12.78-12.78 0-.195 0-.391-.014-.586A9.128 9.128 0 0 0 24 4.557a8.97 8.97 0 0 1-2.357.646 4.48 4.48 0 0 0 1.963-2.475z" fill="currentColor"/>
-                    </svg>
-                </a>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
-        <h2>Ready to Transform Your Videos?</h2>
-        <p>Contact us today and let's discuss how we can bring your vision to life with our professional video editing services.</p>
-        <a href="#touch" class="cta-button-light">Get In Touch</a>
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Elevate Your Content?</h2>
+            <p>Let's discuss your project and create something amazing together. Get in touch with us today for a free
+                consultation and quote.</p>
+
+            <div class="contact-icons">
+                <a href="https://wa.me/7859990133" class="contact-icon" target="_blank"><i
+                        class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+                <a href="tel:7859990133" class="contact-icon"><i class="fas fa-phone"></i><span>Call Us</span></a>
+                <a href="mailto:g.square.edits@hotmail.com" class="contact-icon"><i
+                        class="fas fa-envelope"></i><span>Email</span></a>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 G² Edits. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo-placeholder"><img src="g.png" alt="" style="height: 80px; width: 80px; ">
+                    </div>
+                    <p>Transforming visions into captivating visual stories through professional video editing and
+                        post-production services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Video Editing</a></li>
+                        <li><a href="#">Color Grading</a></li>
+                        <li><a href="#">Sound Design</a></li>
+                        <li><a href="#">Motion Graphics</a></li>
+                        <li><a href="#">Visual Effects</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Creative St, Media City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@g2edits.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 G² Edits. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
+
 </html>
-
-
