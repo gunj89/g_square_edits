@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G² Edits - Professional Video Editing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo svg {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.2));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 5% 0;
+            gap: 4rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 50%, #f0f3f7 100%);
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: #2c3e50;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .hero-visual {
+            flex: 1;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .hero-visual-box {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .hero-visual-box svg {
+            width: 60%;
+            height: 60%;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            height: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .portfolio-item svg {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 45px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Get In Touch Section */
+        .get-in-touch {
+            padding: 6rem 5%;
+            background: #fff;
+        }
+
+        .touch-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .touch-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .contact-box a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: inherit;
+            gap: 0.8rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 10px;
+        }
+
+        .contact-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-info strong {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-info span {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button-light {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            padding: 2rem 5%;
+            text-align: center;
+            color: #bdc3c7;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 100px 5% 3rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-visual-box {
+                aspect-ratio: auto;
+                height: 300px;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <p>G² Edits</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#touch">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Transform Your <span>Vision</span> Into Motion</h1>
+            <p>Professional video editing that tells your story. Fast turnaround, exceptional quality, and creative excellence delivered every time.</p>
+            <button class="cta-button">Start Your Project</button>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-visual-box">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="filmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"
+                        </linearGradient>
+                    </defs>
+                    <!-- Film strip -->
+                    <rect x="40" y="30" width="120" height="140" rx="10" fill="none" stroke="white" stroke-width="3"/>
+                    <line x1="50" y1="45" x2="150" y2="45" stroke="white" stroke-width="1" opacity="0.5"/>
+                    <line x1="50" y1="155" x2="150" y2="155" stroke="white" stroke-width="1" opacity="0.5"/>
+                    <!-- Play button -->
+                    <circle cx="100" cy="100" r="30" fill="none" stroke="white" stroke-width="2"/>
+                    <polygon points="85,85 85,115 125,100" fill="white"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose G² Edits</h2>
+        <p class="section-subtitle">We deliver professional video editing with precision and creativity</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="url(#iconGradient1)"/>
+                    </svg>
+                </div>
+                <h3>Precision Editing</h3>
+                <p>Frame-perfect cuts, seamless transitions, and professional-grade editing that captivates your audience</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none" stroke="url(#iconGradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="13 2 13 9 20 9" fill="none" stroke="url(#iconGradient2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Fast Turnaround</h3>
+                <p>Quick delivery without compromising quality. Get your videos ready when you need them</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="url(#iconGradient3)" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" fill="none" stroke="url(#iconGradient3)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Creative Design</h3>
+                <p>Custom color grading, effects, motion graphics, and animations tailored to your brand</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="url(#iconGradient4)" stroke-width="2"/>
+                        <path d="M2 17h20" stroke="url(#iconGradient4)" stroke-width="2"/>
+                        <circle cx="12" cy="9" r="3" fill="url(#iconGradient4)"/>
+                    </svg>
+                </div>
+                <h3>Platform Optimized</h3>
+                <p>Perfectly formatted for YouTube, TikTok, Instagram, and all major social media platforms</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="url(#iconGradient5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Full Collaboration</h3>
+                <p>Open communication, multiple revisions, and your vision brought to life with our expertise</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="iconGradient6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#iconGradient6)"/>
+                    </svg>
+                </div>
+                <h3>Cutting Edge</h3>
+                <p>Using the latest tools, trends, and techniques to keep your content ahead of the competition</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">Our Recent Work</h2>
+        <p class="section-subtitle">Showcase of our latest video editing projects</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="20" width="80" height="60" rx="5" fill="none" stroke="white" stroke-width="3"/>
+                    <polygon points="40,35 40,65 70,50" fill="white"/>
+                </svg>
+            </div>
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="20" fill="white" opacity="0.3"/>
+                    <path d="M50 35 L65 50 L50 65 L35 50 Z" fill="white"/>
+                </svg>
+            </div>
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="15" width="70" height="70" rx="8" fill="none" stroke="white" stroke-width="3"/>
+                    <line x1="20" y1="40" x2="80" y2="40" stroke="white" stroke-width="2"/>
+                    <circle cx="35" cy="60" r="8" fill="white"/>
+                    <path d="M50 50 L80 25" stroke="white" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 15 L85 40 L75 85 L25 85 L15 40 Z" fill="none" stroke="white" stroke-width="3"/>
+                    <circle cx="50" cy="55" r="12" fill="white"/>
+                </svg>
+            </div>
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="60" height="60" rx="10" fill="none" stroke="white" stroke-width="3"/>
+                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="2"/>
+                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="portfolio-item">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,20 80,50 65,85 35,85 20,50" fill="none" stroke="white" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get In Touch Section -->
+    <section class="get-in-touch" id="touch">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="touch-container">
+            <p class="touch-description">Let's collaborate and create something amazing together. Reach out through any of these channels and we'll get back to you shortly.</p>
+
+            <div class="contact-options">
+                <div class="contact-box">
+                    <a href="tel:+919876543210">
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="phoneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 2.08 2.18 2 2 0 0 1 4 2h3a2 2 0 0 1 1.85 1.29 15.94 15.94 0 0 0 8.24 8.24A2 2 0 0 1 22 16.92z" fill="url(#phoneGradient)"/>
+                            </svg>
+                        </span>
+                        <div class="contact-info">
+                            <strong>Call Us</strong>
+                            <span>+91 98765 43210</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-box">
+                    <a href="mailto:info@g2edits.com">
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="emailGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2a2 2 0 0 1 2 2v2.59l3.29 3.29a2 2 0 0 1 0 2.83L14 16.59V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2.59l-3.29-3.29a2 2 0 0 1 0-2.83L4 5.41V3a2 2 0 0 1 2-2h8zm0 2H6v2.41l-1.29 1.29a2 2 0 0 0 0 2.83L6 12.59V15h8v-2.41l1.29-1.29a2 2 0 0 0 0-2.83L14 5.41V4zm-2 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="url(#emailGradient)"/>
+                            </svg>
+                        </span>
+                        <div class="contact-info">
+                            <strong>Email Us</strong>
+                            <span>info@g2edits.com</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="contact-box">
+                    <a href="https://wa.me/919876543210" target="_blank">
+                        <span class="contact-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="whatsappGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2a10 10 0 0 0-7.94 16.26l-2.48 2.48A1 1 0 0 0 2 22a1 1 0 0 0 1.24-.74l2.48-2.48A10 10 0 1 0 12 2zm0 18a7.94 7.94 0 0 1-5.66-2.34l1.41-1.41A5.98 5.98 0 0 0 12 18a5.98 5.98 0 0 0 3.54-1.24l1.41 1.41A7.94 7.94 0 0 1 12 20zm-3-8a3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3zm4 0a1 1 0 0 0-2 0 1 1 0 0 0 2 0z" fill="url(#whatsappGradient)"/>
+                            </svg>
+                        </span>
+                        <div class="contact-info">
+                            <strong>WhatsApp</strong>
+                            <span>Chat with us</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://facebook.com/g2edits" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.675 0h-21.35C.596 0 0 .596 0 1.325v21.35C0 23.404.596 24 1.325 24h11.494v-9.294H9.691V11.25h3.128V8.418c0-3.1 1.892-4.788 4.655-4.788 1.325 0 2.465.098 2.798.142v3.24l-1.922.001c-1.505 0-1.794.715-1.794 1.764v2.313h3.588l-.467 3.456h-3.121V24h6.116c.729 0 1.325-.596 1.325-1.325v-21.35C24 .596 23.404 0 22.675 0z" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/g2edits" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.197 0 3.582.012 4.845.07 1.261.058 1.905.263 2.345.442.537.207 1.004.478 1.45.925.446.446.717.913.925 1.45.179.44.384 1.084.442 2.345.058 1.263.07 1.648.07 4.845s-.012 3.582-.07 4.845c-.058 1.261-.263 1.905-.442 2.345-.207.537-.478 1.004-.925 1.45-.446.446-.913.717-1.45.925-.44.179-.84.384-2.345.442-1.263.058-1.648.07-4.845.07s-3.582-.012-4.845-.07c-1.261-.058-1.905-.263-2.345-.442a3.42 3.42 0 0 1-1.45-.925 3.42 3.42 0 0 1-.925-1.45c-.179-.44-.384-.84-.442-2.345C2.175 15.582 2.163 15.197 2.163 12s.012-3.582.07-4.845c.058-1.261.263-1.905.442-2.345.207-.537.478-1.004.925-1.45.446-.446.913-.717 1.45-.925.44-.179.84-.384 2.345-.442C8.418 2.175 8.803 2.163 12 2.163zm0-2.163C8.638 0 8.25.012 7.045.07 5.84.127 4.9.263 4.045.442 3.19.62 2.5 1.31 1.85 2.045.62 3.19.127 4.13.07 5.335.012 6.538 0 6.925 0 10.287c0 3.362.012 3.75.07 4.955.058 1.261.263 1.905.442 2.345.207.537.478 1.004.925 1.45.446.446.913.717 1.45.925.44.179.84.384 2.345.442 1.205.058 1.593.07 4.845.07s3.582-.012 4.845-.07c1.261-.058 1.905-.263 2.345-.442.537-.207 1.004-.478 1.45-.925.446-.446.717-.913.925-1.45.179-.44.384-1.084.442-2.345.058-1.263.07-1.648.07-4.845s-.012-3.582-.07-4.845c-.058-1.261-.263-1.905-.442-2.345a3.42 3.42 0 0 0-.925-1.45 3.42 3.42 0 0 0-1.45-.925c-.44-.179-.84-.384-2.345-.442C15.582 2.175 15.197 2.163 12 2.163zm0 5.837a6.163 6.163 0 1 0 0 12.325 6.163 6.163 0 0 0 0-12.325zm0 10.325a4.163 4.163 0 1 1 0-8.325 4.163 4.163 0 0 1 0 8.325zm4.5-10.325a1.125 1.125 0 1 0-2.25 0 1.125 1.125 0 0 0 2.25 0z" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/g2edits" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.643 4.937a10.97 10.97 0 0 1-3.128.855 4.48 4.48 0 0 0 1.963-2.475 9.034 9.034 0 0 1-2.827 1.078A4.48 4.48 0 0 0 16.337 3c-2.475 0-4.48 2.005-4.48 4.48 0 .351.04.694.117 1.027A12.74 12.74 0 0 1 1.671 3.149a4.48 4.48 0 0 0-.605 2.243c0 1.548.788 2.91 1.984 3.707a4.48 4.48 0 0 1-2.023-.56v.057c0 2.164 1.537 3.965 3.568 4.375a4.48 4.48 0 0 1-2.016.077c.572 1.791 2.224 3.096 4.176 3.131A9.034 9.034 0 0 1 0 18.293a12.74 12.74 0 0 0 6.91 2.023c8.27 0 12.78-6.857 12.78-12.78 0-.195 0-.391-.014-.586A9.128 9.128 0 0 0 24 4.557a8.97 8.97 0 0 1-2.357.646 4.48 4.48 0 0 0 1.963-2.475z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Videos?</h2>
+        <p>Contact us today and let's discuss how we can bring your vision to life with our professional video editing services.</p>
+        <a href="#touch" class="cta-button-light">Get In Touch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 G² Edits. All rights reserved.</p>
+    </footer>
+</body>
+</html>
