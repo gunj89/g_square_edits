@@ -19,85 +19,67 @@
             line-height: 1.6;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo svg {
-            width: 45px;
-            height: 45px;
-            filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.2));
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        /* Hero Section */
+        /* Hero Section - Centered with Animation */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 100px 5% 0;
-            gap: 4rem;
+            justify-content: center;
+            padding: 2rem 5%;
             background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 50%, #f0f3f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        .hero::before,
+        .hero::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::before {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: -100px;
+            right: -100px;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .hero::after {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            bottom: -50px;
+            left: -50px;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
         }
 
         .hero-content {
-            flex: 1;
+            text-align: center;
+            max-width: 800px;
             animation: slideInLeft 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes slideInLeft {
             from {
                 opacity: 0;
                 transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
             }
             to {
                 opacity: 1;
@@ -145,29 +127,6 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-        }
-
-        .hero-visual {
-            flex: 1;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .hero-visual-box {
-            width: 100%;
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-        }
-
-        .hero-visual-box svg {
-            width: 60%;
-            height: 60%;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
 
         /* Features Section */
@@ -439,28 +398,22 @@
         }
 
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                padding: 100px 5% 3rem;
-                text-align: center;
-            }
-
             .hero h1 {
                 font-size: 2.2rem;
             }
 
-            .hero-visual {
-                order: -1;
+            .hero::before {
+                width: 250px;
+                height: 250px;
+                top: -80px;
+                right: -80px;
             }
 
-            .hero-visual-box {
-                aspect-ratio: auto;
-                height: 300px;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.85rem;
+            .hero::after {
+                width: 200px;
+                height: 200px;
+                bottom: -30px;
+                left: -30px;
             }
 
             .section-title {
@@ -474,44 +427,12 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">
-            <p>G² Edits</p>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#touch">Contact</a></li>
-        </ul>
-    </nav>
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Transform Your <span>Vision</span> Into Motion</h1>
+            <h1>Transform Your <span>Vision</span> Into Motion With <span>G² Edits</span></h1>
             <p>Professional video editing that tells your story. Fast turnaround, exceptional quality, and creative excellence delivered every time.</p>
             <button class="cta-button">Start Your Project</button>
-        </div>
-        <div class="hero-visual">
-            <div class="hero-visual-box">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="filmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"
-                        </linearGradient>
-                    </defs>
-                    <!-- Film strip -->
-                    <rect x="40" y="30" width="120" height="140" rx="10" fill="none" stroke="white" stroke-width="3"/>
-                    <line x1="50" y1="45" x2="150" y2="45" stroke="white" stroke-width="1" opacity="0.5"/>
-                    <line x1="50" y1="155" x2="150" y2="155" stroke="white" stroke-width="1" opacity="0.5"/>
-                    <!-- Play button -->
-                    <circle cx="100" cy="100" r="30" fill="none" stroke="white" stroke-width="2"/>
-                    <polygon points="85,85 85,115 125,100" fill="white"/>
-                </svg>
-            </div>
         </div>
     </section>
 
